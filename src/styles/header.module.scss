@@ -1,6 +1,15 @@
 .headerContainer {
     display: grid;
+    height: 100%;
+    margin: 20px;
     background-color: springgreen;
     grid-template-columns: 1fr 3fr 1fr;
+    grid-template-areas:
+    "a b b b c";
     box-sizing: border-box;
+    .button{
+        grid-area: c;
+        justify-self: end;
+        margin-left: 20px;
+    }
 }

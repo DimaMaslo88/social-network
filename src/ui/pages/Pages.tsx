@@ -1,14 +1,16 @@
 import React from 'react';
 import {Routes,Route} from 'react-router-dom';
 import {PATH} from "ui/enum/Path";
-import {Messages} from "ui/pages/messages/Messages";
+import {ChatPage} from "ui/pages/messages/chatPage/ChatPage";
+import {Login} from "ui/pages/authorization/login/Login";
 
 
 export const Pages = () => {
     return (
         <div>
             <Routes>
-                <Route path={PATH.messages} element={<Messages/>}/>
+                <Route path={PATH.chat} element={<ChatPage/>}/>
+                <Route path={PATH.login} element={<Login/>}/>
             </Routes>
         </div>
     );

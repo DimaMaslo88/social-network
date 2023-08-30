@@ -15,7 +15,7 @@ export const NavBar = () => {
             </div>
             <div className={style.navbarContent}>
                 <Message width="32" height="32"/>
-                <div className={style.titleNavStyle}><NavLink to="/messages"><Title title="Сообщения"/></NavLink></div>
+                <div className={style.titleNavStyle}><NavLink to="/chat"><Title title="Сообщения"/></NavLink></div>
             </div>
             <div className={style.navbarContent}>
                 <Gear width="32" height="32"/>
