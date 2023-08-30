@@ -1,4 +1,6 @@
 import {MessagesActionsType} from "bll/actions/messagesActions";
+import {AppThunkType} from "bll/store";
+import {AuthApi} from "api/auth-api/auth-api";
 
 const messagesReducerState = {
     messages: []
@@ -16,3 +18,5 @@ export const MessagesReducer = (state: MessagesReducerType = messagesReducerStat
             return state
     }
 }
+
+

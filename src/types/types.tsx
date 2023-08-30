@@ -9,3 +9,12 @@ export type LoginFormTYpe = {
     email?:string
     password?:string
 }
+
+
+
+// ResponseTypes
+export type AuthResponseType={
+    resultCode:number,
+    messages:string,
+    data: {}
+}
