@@ -18,3 +18,13 @@ export type AuthResponseType={
     messages:string,
     data: {}
 }
+
+export type InitializeResponseType={
+    resultCode: 0
+    messages: [],
+    data: {
+        id: 2,
+        email: string,
+        login: string
+    }
+}

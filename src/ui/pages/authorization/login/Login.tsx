@@ -1,9 +1,22 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useFormik} from "formik";
 import style from 'styles/login.module.scss'
 import {LoginFormTYpe} from "types/types";
+import {useAppDispatch} from "bll/store";
+import {LoginUser} from "bll/reducers/authReducer";
+import {useSelector} from "react-redux";
+import {selectIsAuthUser} from "bll/selectors/Selectors";
+import {useNavigate} from "react-router-dom";
 
 export const Login = () => {
+    const dispatch = useAppDispatch()
+    const isAuth = useSelector(selectIsAuthUser)
+    const navigate = useNavigate()
+    useEffect(()=>{
+        if(isAuth){
+            navigate('/profile')
+        }
+    },[isAuth])
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -24,6 +37,7 @@ export const Login = () => {
             return errors
         },
         onSubmit: (values) => {
+            dispatch(LoginUser(values))
             formik.resetForm()
         }
     })

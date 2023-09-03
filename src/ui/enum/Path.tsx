@@ -1,6 +1,7 @@
 export enum PATH {
 messages = "messages",
     chat = 'chat',
-    login = 'login'
+    login = 'login',
+    profile = 'profile'
 
 }

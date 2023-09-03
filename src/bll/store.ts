@@ -24,3 +24,7 @@ export type AppThunkType<ReturnType = void> = ThunkAction<
     >;
 export type ActionStateType = MessagesReducerActions
 |AuthReducerActions
+
+// @ts-ignore
+window.store = store
+
