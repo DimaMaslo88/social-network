@@ -9,25 +9,33 @@ import {useAppDispatch} from "bll/store";
 import {useSelector} from "react-redux";
 import {selectIsAuthUser} from "bll/selectors/Selectors";
 import {useNavigate} from "react-router-dom";
+import {Login} from "ui/pages/authorization/login/Login";
+import {MainContent} from "ui/components/mainContent/mainContent";
 
 function App() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const isAuth = useSelector(selectIsAuthUser)
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(InitializeUser())
-    },[])
-    useEffect(()=>{
-        if(!isAuth){
+    }, [])
+    useEffect(() => {
+        if (!isAuth) {
             navigate('/login')
         }
-    },[isAuth])
+    }, [isAuth])
     return (
         <div className='main-container'>
             <Header/>
             <div className={style.contentContainer}>
-                <NavBar/>
-                <Pages/>
+                {isAuth ? (
+                    <MainContent/>
+                ) : <div className={style.loginContent}>
+                    <Login/>
+                </div>
+                }
+
+
             </div>
 
         </div>

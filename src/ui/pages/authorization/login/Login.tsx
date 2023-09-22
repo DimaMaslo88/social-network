@@ -12,11 +12,11 @@ export const Login = () => {
     const dispatch = useAppDispatch()
     const isAuth = useSelector(selectIsAuthUser)
     const navigate = useNavigate()
-    useEffect(()=>{
-        if(isAuth){
+    useEffect(() => {
+        if (isAuth) {
             navigate('/profile')
         }
-    },[isAuth])
+    }, [isAuth])
     const formik = useFormik({
         initialValues: {
             email: '',
@@ -42,9 +42,10 @@ export const Login = () => {
         }
     })
     return (
-        <form onSubmit={formik.handleSubmit} >
-            <div >
+        <form onSubmit={formik.handleSubmit} className={style.login}>
+            <div>
                 <input
+                    className={style.input}
                     placeholder='email'
                     {...formik.getFieldProps('email')}
                 />
@@ -57,8 +58,8 @@ export const Login = () => {
             </div>
             <div>
                 <input
+                    className={style.input}
                     placeholder='пароль'
-
                     {...formik.getFieldProps('password')}
                 />
                 {formik.touched.password && formik.errors.password && (

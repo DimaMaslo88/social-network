@@ -9,10 +9,10 @@ import {Profile} from "ui/pages/profile/profile";
 export const Pages = () => {
     return (
         <div>
-            <Routes>
+            <Routes >
                 <Route path={PATH.chat} element={<ChatPage/>}/>
-                <Route path={PATH.login} element={<Login/>}/>
-                <Route path={PATH.profile} element={<Profile/>}/>
+                <Route path={PATH.login} element={<Login/>} />
+                <Route path={PATH.profile} element={<Profile/>} />
             </Routes>
         </div>
     );

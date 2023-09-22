@@ -19,7 +19,7 @@ const logOutHandler =()=>{
     return (
         <div className={style.headerContainer}>
             <div className={style.button}>
-                {!isAuth ? <button onClick={navigateToLogin}>Войти</button> :
+                {isAuth &&
                     <button onClick={logOutHandler}>Выйти</button>}
 
             </div>
