@@ -7,6 +7,7 @@ import {LoginUser} from "bll/reducers/authReducer";
 import {useSelector} from "react-redux";
 import {selectIsAuthUser} from "bll/selectors/Selectors";
 import {useNavigate} from "react-router-dom";
+import {Button} from "ui/components/universal/button/Button";
 
 export const Login = () => {
     const dispatch = useAppDispatch()
@@ -60,6 +61,7 @@ export const Login = () => {
                 <input
                     className={style.input}
                     placeholder='пароль'
+
                     {...formik.getFieldProps('password')}
                 />
                 {formik.touched.password && formik.errors.password && (
@@ -70,11 +72,11 @@ export const Login = () => {
 
             </div>
             <div>
-                <button
+                <Button
                     type='submit'
                     disabled={!formik.isValid}
                 >Подтвердить
-                </button>
+                </Button>
             </div>
 
 
