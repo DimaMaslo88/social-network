@@ -8,6 +8,7 @@ import {useSelector} from "react-redux";
 import {selectIsAuthUser} from "bll/selectors/Selectors";
 import {useNavigate} from "react-router-dom";
 import {Button} from "ui/components/universal/button/Button";
+import {EyeVisible} from "images/password icons/eye_visible";
 
 export const Login = () => {
     const dispatch = useAppDispatch()
@@ -44,32 +45,43 @@ export const Login = () => {
     })
     return (
         <form onSubmit={formik.handleSubmit} className={style.login}>
-            <div>
-                <input
-                    className={style.input}
-                    placeholder='email'
-                    {...formik.getFieldProps('email')}
-                />
-                {formik.touched.email && formik.errors.email && (
-                    <div className={style.error}>
-                        {formik.errors.email}
-                    </div>
-                )
-                }
-            </div>
-            <div>
-                <input
-                    className={style.input}
-                    placeholder='пароль'
+            <div className={style.inputContainer}>
+                <div>
+                    <input
+                        className={style.input}
+                        placeholder='email'
+                        {...formik.getFieldProps('email')}
+                    />
+                    {formik.touched.email && formik.errors.email && (
+                        <div className={style.error}>
+                            {formik.errors.email}
+                        </div>
+                    )
+                    }
+                </div>
+                <div className={style.inputPasswordContainer}>
+                    <input
+                        type='password'
+                        className={style.inputPassword}
+                        placeholder='пароль'
 
-                    {...formik.getFieldProps('password')}
-                />
+                        {...formik.getFieldProps('password')}
+
+                    />
+                    <span className={style.spanToggle}>
+                        <EyeVisible
+                            width='30px'
+                        className={style.toggleIcon}
+                        />
+                    </span>
+
+
+                </div>
                 {formik.touched.password && formik.errors.password && (
                     <div className={style.error}>
                         {formik.errors.password}
                     </div>
                 )}
-
             </div>
             <div>
                 <Button
