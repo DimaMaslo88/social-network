@@ -4,15 +4,17 @@ import style from 'styles/button.module.scss'
 type DefaultButtonPropsType = DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>
 
 type SuperButtonPropsType = DefaultButtonPropsType & {
-    red?: boolean
+    black?: boolean
 
 }
 
-export const Button: React.FC<SuperButtonPropsType> = ({red, className, ...restProps}) => {
+export const Button: React.FC<SuperButtonPropsType> = ({black, className, ...restProps}) => {
+    const finalStyle = `${style.btn} ${black ? style.black : ''} ${className}`
+
     return (
         <button
 
-      className={style.btn}
+      className={finalStyle}
             {...restProps}
         />
 

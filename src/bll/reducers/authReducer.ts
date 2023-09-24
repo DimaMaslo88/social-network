@@ -8,6 +8,7 @@ import {
     setIsAuth,
     SetIsAuthType
 } from "bll/actions/authActions";
+import {setAppStatus} from "bll/actions/appActions";
 
 const authReducerState = {
     isAuth: false,
@@ -42,6 +43,7 @@ export const AuthReducer = (state: AuthReducerType = authReducerState, action: A
 
 
 export const LoginUser = (data:{email:string, password:string}): AppThunkType => async (dispatch) => {
+   dispatch(setAppStatus(true))
     try {
         const res = await AuthApi.loginUser(data)
         console.log(res.data)
@@ -52,6 +54,8 @@ export const LoginUser = (data:{email:string, password:string}): AppThunkType =>
 
     }catch (error){
         console.log(error)
+    }finally {
+        dispatch(setAppStatus(false))
     }
 }
 export const InitializeUser = ():AppThunkType => async(dispatch)=>{

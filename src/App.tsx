@@ -1,21 +1,22 @@
 import React, {useEffect} from 'react';
-import './App.scss';
 import {Header} from "ui/components/header/Header";
-import {NavBar} from "ui/components/navBar/NavBar";
-import {Pages} from "ui/pages/Pages";
 import style from 'styles/contentContainer.module.scss'
 import {InitializeUser} from "bll/reducers/authReducer";
 import {useAppDispatch} from "bll/store";
 import {useSelector} from "react-redux";
-import {selectIsAuthUser} from "bll/selectors/Selectors";
+import {selectAppStatus, selectIsAuthUser} from "bll/selectors/Selectors";
 import {useNavigate} from "react-router-dom";
 import {Login} from "ui/pages/authorization/login/Login";
 import {MainContent} from "ui/components/mainContent/mainContent";
+import {Footer} from "ui/components/footer/Footer";
+import {RotatingLines} from "react-loader-spinner";
+import s from './App.module.scss'
 
 function App() {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const isAuth = useSelector(selectIsAuthUser)
+    const status = useSelector(selectAppStatus)
     useEffect(() => {
         dispatch(InitializeUser())
     }, [])
@@ -26,7 +27,24 @@ function App() {
     }, [isAuth])
     return (
         <div className='main-container'>
+
             <Header/>
+
+                {status && <div  className={s.spinner}>
+                <RotatingLines
+                    strokeColor="grey"
+                    strokeWidth="4"
+                    animationDuration="0.75"
+                    width="76"
+
+                />
+                    <div>
+                        Идет загрузка ...
+                    </div>
+
+                </div>}
+
+
             <div className={style.contentContainer}>
                 {isAuth ? (
                     <MainContent/>
@@ -38,6 +56,7 @@ function App() {
 
             </div>
 
+            <Footer/>
         </div>
     );
 }
