@@ -26,25 +26,19 @@ function App() {
         }
     }, [isAuth])
     return (
-        <div className='main-container'>
-
+        <div className={s.mainContainer}>
             <Header/>
-
-                {status && <div  className={s.spinner}>
+            {status && <div className={s.spinner}>
                 <RotatingLines
                     strokeColor="grey"
                     strokeWidth="4"
                     animationDuration="0.75"
                     width="76"
-
                 />
-                    <div>
-                        Идет загрузка ...
-                    </div>
-
-                </div>}
-
-
+                <div>
+                    Идет загрузка ...
+                </div>
+            </div>}
             <div className={style.contentContainer}>
                 {isAuth ? (
                     <MainContent/>
@@ -52,11 +46,11 @@ function App() {
                     <Login/>
                 </div>
                 }
-
-
+            </div>
+            <div className={s.footerContainer}>
+                <Footer/>
             </div>
 
-            <Footer/>
         </div>
     );
 }
