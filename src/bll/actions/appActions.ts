@@ -5,3 +5,10 @@ export const setAppStatus = (status:boolean)=>{
         status
     }as const
 }
+export type SetAppErrorType = ReturnType<typeof setAppError>
+export const  setAppError = (error:string | null) =>{
+    return {
+        type:'SET-APP-ERROR',
+        error
+    }as const
+}

@@ -9,6 +9,7 @@ import {
     SetIsAuthType
 } from "bll/actions/authActions";
 import {setAppStatus} from "bll/actions/appActions";
+import {handleServerError} from "ui/error-util/error";
 
 const authReducerState = {
     isAuth: false,
@@ -51,9 +52,9 @@ export const LoginUser = (data:{email:string, password:string}): AppThunkType =>
             dispatch(setIsAuth(true))
 
         }
-
     }catch (error){
-        console.log(error)
+        handleServerError(error,dispatch)
+
     }finally {
         dispatch(setAppStatus(false))
     }
@@ -72,6 +73,7 @@ export const InitializeUser = ():AppThunkType => async(dispatch)=>{
 }
 
 export const LogOut =():AppThunkType=>async(dispatch)=>{
+    dispatch(setAppStatus(true))
     try{
        const res = await AuthApi.logOut()
         if(res.data.resultCode === 0){
@@ -80,5 +82,7 @@ export const LogOut =():AppThunkType=>async(dispatch)=>{
         }
     }catch (error){
         console.log(error)
+    }finally {
+        dispatch(setAppStatus(false))
     }
 }
