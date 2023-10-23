@@ -4,12 +4,13 @@ import style from 'styles/contentContainer.module.scss'
 import {InitializeUser} from "bll/reducers/authReducer";
 import {useAppDispatch} from "bll/store";
 import {useSelector} from "react-redux";
-import {selectAppStatus, selectIsAuthUser} from "bll/selectors/Selectors";
+import { selectAppStatus, selectIsAuthUser} from "bll/selectors/Selectors";
 import {useNavigate} from "react-router-dom";
 import {Login} from "ui/pages/authorization/login/Login";
 import {MainContent} from "ui/components/mainContent/mainContent";
 import {Footer} from "ui/components/footer/Footer";
 import {RotatingLines} from "react-loader-spinner";
+import {ToastContainer} from "react-toastify";
 import s from './App.module.scss'
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
     const navigate = useNavigate()
     const isAuth = useSelector(selectIsAuthUser)
     const status = useSelector(selectAppStatus)
+
     useEffect(() => {
         dispatch(InitializeUser())
     }, [])
@@ -25,6 +27,7 @@ function App() {
             navigate('/login')
         }
     }, [isAuth])
+
     return (
         <div className={s.mainContainer}>
             <Header/>
@@ -48,6 +51,18 @@ function App() {
                 }
             </div>
             <div className={s.footerContainer}>
+                <ToastContainer
+                    position="top-center"
+                    autoClose={5000}
+                    hideProgressBar={false}
+                    newestOnTop={false}
+                    closeOnClick
+                    rtl={false}
+                    pauseOnFocusLoss
+                    draggable
+                    pauseOnHover
+                    theme="light"
+                />
                 <Footer/>
             </div>
 

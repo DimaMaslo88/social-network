@@ -5,18 +5,19 @@ import {LoginFormTYpe} from "types/types";
 import {useAppDispatch} from "bll/store";
 import {LoginUser} from "bll/reducers/authReducer";
 import {useSelector} from "react-redux";
-import {selectIsAuthUser} from "bll/selectors/Selectors";
+import {selectAppServerError, selectIsAuthUser} from "bll/selectors/Selectors";
 import {useNavigate} from "react-router-dom";
 import {Button} from "ui/components/universal/button/Button";
 import {EyeVisible} from "images/password icons/eye_visible";
 import {EyeNotVisible} from "images/password icons/eye-off-svgrepo-com";
+import {toast} from "react-toastify";
 
 export const Login = () => {
     const dispatch = useAppDispatch()
     const isAuth = useSelector(selectIsAuthUser)
     const navigate = useNavigate()
     const [active,setActive] = useState<boolean>(false)
-
+    const error = useSelector(selectAppServerError)
     useEffect(() => {
         if (isAuth) {
             navigate('/profile')
@@ -49,6 +50,14 @@ export const Login = () => {
             formik.resetForm()
         }
     })
+
+    const notify = () => {
+        if(error){
+            toast.error("Ebat")
+        }
+    }
+
+
     return (
         <form onSubmit={formik.handleSubmit} className={style.login}>
             <div className={style.inputContainer}>
@@ -111,6 +120,7 @@ export const Login = () => {
                 <Button
                     type='submit'
                     disabled={!formik.isValid}
+                    onClick={notify}
                 >Подтвердить
                 </Button>
             </div>
