@@ -2,7 +2,7 @@ import {AppThunkType} from "bll/store";
 import {AuthApi} from "api/auth-api/auth-api";
 import {
     setAuthUser,
-    SetAuthUser,
+    SetAuthUser, setCaptcha, SetCaptchaType,
     setInitialized,
     SetInitializedType,
     setIsAuth,
@@ -10,22 +10,26 @@ import {
 } from "bll/actions/authActions";
 import {setAppStatus} from "bll/actions/appActions";
 import {handleServerError} from "ui/error-util/error";
+import {SecurityApi} from "api/security/captcha";
 
 const authReducerState = {
     isAuth: false,
     isInitialized:false,
     email: '',
-    password: ''
+    password: '',
+    captcha:''
 }
 export type AuthReducerType={
     isAuth:boolean
     isInitialized:boolean
     email:string
     password:string
+    captcha:string
 }
 export type AuthReducerActions = SetAuthUser
 |SetIsAuthType
 |SetInitializedType
+|SetCaptchaType
 export const AuthReducer = (state: AuthReducerType = authReducerState, action: AuthReducerActions):AuthReducerType => {
     switch (action.type) {
         case "auth/SET-AUTH-USER":{
@@ -37,11 +41,24 @@ export const AuthReducer = (state: AuthReducerType = authReducerState, action: A
         case "auth/SET-INITIALIZED-AUTH":{
             return {...state,isInitialized:action.isInitialed}
         }
+        case "SET-CAPTCHA":{
+            return {...state,captcha:action.captcha}
+        }
         default:
             return state
     }
 }
-
+export const GetCaptcha=():AppThunkType=>async(dispatch)=>{
+    dispatch (setAppStatus(true))
+    try{
+        const res = await SecurityApi.getCaptcha()
+        dispatch(setCaptcha(res.data))
+    }catch(error){
+        handleServerError(error,dispatch)
+    }finally {
+        dispatch(setAppStatus(false))
+    }
+}
 
 export const LoginUser = (data:{email:string, password:string}): AppThunkType => async (dispatch) => {
    dispatch(setAppStatus(true))
@@ -51,6 +68,9 @@ export const LoginUser = (data:{email:string, password:string}): AppThunkType =>
         if(res.data.resultCode === 0){
             dispatch(setIsAuth(true))
 
+        }
+        if(res.data.resultCode === 10){
+           dispatch( GetCaptcha ())
         }
     }catch (error){
         handleServerError(error,dispatch)
