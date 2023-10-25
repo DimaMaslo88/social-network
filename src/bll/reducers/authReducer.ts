@@ -63,6 +63,7 @@ export const GetCaptcha=():AppThunkType=>async(dispatch)=>{
 export const LoginUser = (data:{email:string, password:string}): AppThunkType => async (dispatch) => {
    dispatch(setAppStatus(true))
     try {
+       debugger
         const res = await AuthApi.loginUser(data)
         console.log(res.data)
         if(res.data.resultCode === 0){
@@ -73,6 +74,7 @@ export const LoginUser = (data:{email:string, password:string}): AppThunkType =>
            dispatch( GetCaptcha ())
         }
     }catch (error){
+       debugger
         handleServerError(error,dispatch)
 
     }finally {
