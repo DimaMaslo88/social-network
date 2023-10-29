@@ -1,6 +1,9 @@
-import {UserResponseType} from "types/types";
+import {SetUserIdType, setUserProfileData, SetUserProfileDataType} from "bll/actions/userAction";
+import {AppThunkType} from "bll/store";
+import {setAppStatus} from "bll/actions/appActions";
+import {UserApi} from "api/auth-api/user-api";
 
-export const userReducerState ={
+export const userReducerState = {
     userId: null,
     lookingForAJob: false,
     lookingForAJobDescription: '',
@@ -10,30 +13,30 @@ export const userReducerState ={
         vk: '',
         facebook: '',
         instagram: '',
-        twitter:'',
+        twitter: '',
         website: '',
         youtube: '',
-        mainLink:'',
+        mainLink: '',
     },
     photos: {
         small: '',
         large: ''
     }
 }
-export type UserReducerType ={
+export type UserReducerType = {
     userId: number | null
-    lookingForAJob: boolean
-    lookingForAJobDescription: string
+    lookingForAJob?: boolean
+    lookingForAJobDescription?: string
     fullName: string
-    contacts:{
+    contacts: {
         github: string
         vk: string
         facebook: string
         instagram: string
-        twitter:string
+        twitter: string
         website: string
         youtube: string
-        mainLink:string
+        mainLink: string
     }
     photos: {
         small: string
@@ -43,11 +46,33 @@ export type UserReducerType ={
 }
 
 
-export const userReducerActions = null
+export type userReducerActions = SetUserProfileDataType
+    | SetUserIdType
 
-export const UserReducer =(state:UserReducerType=userReducerState,action:any):UserReducerType=>{
-switch (action.type){
+export const UserReducer = (state: UserReducerType = userReducerState, action: userReducerActions): UserReducerType => {
+    switch (action.type) {
+        case "SET-USER-ID": {
+            return {...state, userId: action.userId}
+        }
+        case "SET-USER": {
+            return {...state,...action.data}
+        }
+        default:
+            return state
+    }
+}
+export const GetProfile = (userId: number): AppThunkType => async (dispatch) => {
+    dispatch(setAppStatus(true))
+    try {
+        const res = await UserApi.getUser(userId)
+        dispatch(setUserProfileData(res.data))
+        console.log(res.data)
+    } catch (error) {
+        console.log(error)
+    } finally {
+        dispatch(setAppStatus(false))
+    }
+}
 
-    default:return state
-}
-}
+
+

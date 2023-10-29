@@ -4,12 +4,19 @@ import style from 'styles/contentContainer.module.scss'
 import {InitializeUser} from "bll/reducers/authReducer";
 import {useAppDispatch} from "bll/store";
 import {useSelector} from "react-redux";
-import {selectAppServerError, selectAppStatus, selectIsAuthUser} from "bll/selectors/Selectors";
+import {
+    selectAppServerError,
+    selectAppStatus,
+    selectInitialize,
+    selectIsAuthUser,
+    selectUserId
+} from "bll/selectors/Selectors";
 import {useNavigate} from "react-router-dom";
 import {Login} from "ui/pages/authorization/login/Login";
 import {MainContent} from "ui/components/mainContent/mainContent";
 import {Footer} from "ui/components/footer/Footer";
 import {RotatingLines} from "react-loader-spinner";
+import {GetProfile} from "bll/reducers/userReducer";
 import s from './App.module.scss'
 
 function App() {
@@ -18,9 +25,11 @@ function App() {
     const isAuth = useSelector(selectIsAuthUser)
     const status = useSelector(selectAppStatus)
     const error = useSelector(selectAppServerError)
+
     useEffect(() => {
         dispatch(InitializeUser())
     }, [])
+
     useEffect(() => {
         if (!isAuth) {
             navigate('/login')
