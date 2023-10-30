@@ -1,4 +1,4 @@
-import {SetUserIdType, setUserProfileData, SetUserProfileDataType} from "bll/actions/userAction";
+import {setUserId, SetUserIdType, setUserProfileData, SetUserProfileDataType} from "bll/actions/userAction";
 import {AppThunkType} from "bll/store";
 import {setAppStatus} from "bll/actions/appActions";
 import {UserApi} from "api/auth-api/user-api";
@@ -66,7 +66,8 @@ export const GetProfile = (userId: number): AppThunkType => async (dispatch) => 
     try {
         const res = await UserApi.getUser(userId)
         dispatch(setUserProfileData(res.data))
-        console.log(res.data)
+        dispatch(setUserId(res.data.userId))
+
     } catch (error) {
         console.log(error)
     } finally {

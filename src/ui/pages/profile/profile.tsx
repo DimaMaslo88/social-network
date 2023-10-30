@@ -8,12 +8,12 @@ export const Profile = () => {
     const dispatch = useAppDispatch()
     const userId = useSelector(selectUserId)
     const userName = useSelector(selectUserName)
-    useEffect(()=>{
-        if(userId !== null){
-            dispatch(GetProfile(userId))
-        }
-
-    },[userId,userName])
+    // useEffect(()=>{
+    //     if(userId !== null){
+    //         dispatch(GetProfile(userId))
+    //     }
+    //
+    // },[])
     return (
         <div>
             My profile
