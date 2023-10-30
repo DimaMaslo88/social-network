@@ -2,6 +2,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  .settings{
+    margin-left:60%;
+    margin-top: 10px;
+  }
   .avaBlock{
     height: 100%;
     display: flex;
