@@ -4,11 +4,11 @@ import {PATH} from "ui/enum/Path";
 import {ChatPage} from "ui/pages/messages/chatPage/ChatPage";
 import {Login} from "ui/pages/authorization/login/Login";
 import {Profile} from "ui/pages/profile/profile";
-
+import style from 'styles/pages.module.scss'
 
 export const Pages = () => {
     return (
-        <div>
+        <div className={style.pagesContainer} >
             <Routes >
                 <Route path={PATH.chat} element={<ChatPage/>}/>
                 <Route path={PATH.login} element={<Login/>} />

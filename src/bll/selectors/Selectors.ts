@@ -8,3 +8,6 @@ export const selectInitialize = (state:StateType):boolean=>state.auth.isInitiali
 export const selectCaptcha = (state:StateType):string=>state.auth.captcha
 export const selectUserId = (state:StateType):number | null=>state.user.userId
 export const selectUserName = (state:StateType):string=>state.user.fullName
+export const selectUserPhotoLarge =(state:StateType):string=>state.user.photos.large
+export const selectUserPhotoSmall =(state:StateType):string=>state.user.photos.small
+export const selectUserJob = (state:StateType):boolean=>state.user.lookingForAJob

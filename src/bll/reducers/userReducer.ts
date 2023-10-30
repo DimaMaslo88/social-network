@@ -25,7 +25,7 @@ export const userReducerState = {
 }
 export type UserReducerType = {
     userId: number | null
-    lookingForAJob?: boolean
+    lookingForAJob: boolean
     lookingForAJobDescription?: string
     fullName: string
     contacts: {
@@ -66,7 +66,7 @@ export const GetProfile = (userId: number): AppThunkType => async (dispatch) => 
     try {
         const res = await UserApi.getUser(userId)
         dispatch(setUserProfileData(res.data))
-        dispatch(setUserId(res.data.userId))
+        // dispatch(setUserId(res.data.userId))
 
     } catch (error) {
         console.log(error)

@@ -92,7 +92,6 @@ export const InitializeUser = ():AppThunkType =>
         if(res.data.resultCode === 0){
             dispatch(setIsAuth(true))
             dispatch(setInitialized(true))
-
             dispatch(GetProfile(res.data.data.id))
         }
         console.log(res.data)
