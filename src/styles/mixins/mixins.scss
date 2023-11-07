@@ -5,3 +5,9 @@
   font-weight: $fontWeight;
   color:$bgColor1
 };
+@mixin textP($fontFamily,$fontSize, $fontWeight){
+  font-family: $fontFamily;
+  font-size:$fontSize;
+  font-weight: $fontWeight;
+  color:$bgColor3;
+}

@@ -17,7 +17,6 @@ export const Login = () => {
     const isAuth = useSelector(selectIsAuthUser)
     const navigate = useNavigate()
     const [active, setActive] = useState<boolean>(false)
-
     const captcha = useSelector(selectCaptcha)
     useEffect(() => {
         if (isAuth) {
