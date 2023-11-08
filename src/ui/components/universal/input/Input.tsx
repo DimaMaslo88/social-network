@@ -22,12 +22,12 @@ export const Input = ({
                       }: SuperInputTextPropsType) => {
 
     return (
-        <div>
-            <input
-            type = 'text'
-
-            />
-        </div>
+      <div>
+        <input
+            type="text"
+            {...restProps}
+        />
+      </div>
     );
 };
 

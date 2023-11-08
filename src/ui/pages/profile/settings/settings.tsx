@@ -10,7 +10,7 @@ export const Settings = () => {
     const photoLarge = useSelector(selectUserPhotoLarge)
 
     return (
-        <div className={s.settingBlock}>
+        <div className={s.settingContainer}>
             { photoLarge === null ?
                 <Avatar
                 className={s.ava}
@@ -22,7 +22,7 @@ export const Settings = () => {
                     {photoLarge}
                 </div>
             }
-            <div>
+            <div className={s.inputContainer}>
                 <UserData/>
             </div>
         </div>

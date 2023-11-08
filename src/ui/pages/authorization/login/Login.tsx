@@ -96,7 +96,7 @@ export const Login = () => {
                     <span className={style.spanToggle}>
                         <EyeNotVisible
                             width='25px'
-                            height='30px'
+                            height='32px'
                             className={style.toggleIcon}
                             onClick={onClickHandler}
                         />

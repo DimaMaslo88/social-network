@@ -1,6 +1,10 @@
 
-.settingBlock{
+.settingContainer{
   display: flex;
+  .inputContainer{
+    display: flex;
+    margin-left: 100px;
+  }
 }
 .ava{
   padding: 20px;
