@@ -1,5 +1,5 @@
 import React, {DetailedHTMLProps, InputHTMLAttributes} from 'react';
-
+import style from 'styles/settings.module.scss'
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
 
@@ -22,8 +22,9 @@ export const Input = ({
                       }: SuperInputTextPropsType) => {
 
     return (
-      <div>
+      <div className={style.inputBlock}>
         <input
+            className={style.input}
             type="text"
             {...restProps}
         />

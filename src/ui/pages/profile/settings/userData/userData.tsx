@@ -3,6 +3,7 @@ import style from 'styles/login.module.scss';
 import { useFormik } from 'formik';
 import { LoginUser } from 'bll/reducers/authReducer';
 import { Input } from 'ui/components/universal/input/Input';
+import {Button} from "ui/components/universal/button/Button";
 
 type FormikErrorType= {
   lookingForAJob?: boolean
@@ -59,6 +60,9 @@ const errors:FormikErrorType={}
         <Input placeholder="youtube" />
         <Input placeholder="telegram" />
       </div>
+      <Button>
+        Изменить
+      </Button>
     </form>
   );
 };

@@ -1,11 +1,31 @@
 
 .settingContainer{
   display: flex;
+  .settings{
+    display: flex;
+    flex-direction: column;
+    .icon{
+      margin:0 0 30px 300px;
+      z-index: 50;
+    }
+  }
   .inputContainer{
     display: flex;
     margin-left: 100px;
+    .inputBlock{
+      margin: 10px;
+      .input{
+        width: 200px;
+        height: 25px;
+        border:none;
+        border-radius: 5px;
+        outline: none;
+      }
+
+    }
   }
 }
+
 .ava{
   padding: 20px;
 }
