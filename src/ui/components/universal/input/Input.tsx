@@ -1,4 +1,4 @@
-import React, {DetailedHTMLProps, InputHTMLAttributes} from 'react';
+import React, {ChangeEvent, DetailedHTMLProps, InputHTMLAttributes} from 'react';
 import style from 'styles/settings.module.scss'
 // тип пропсов обычного инпута
 type DefaultInputPropsType = DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
@@ -20,10 +20,20 @@ export const Input = ({
 
                           ...restProps// все остальные пропсы попадут в объект restProps
                       }: SuperInputTextPropsType) => {
+    const onChangeCallback = (e: ChangeEvent<HTMLInputElement>) => {
+        // если есть пропс onChange
+        if (onChange) {
+            onChange(e); // то передать ему е (поскольку onChange не обязателен)
+        }
+        if (onChangeText) {
+            onChangeText(e.currentTarget.value);
+        }
+    };
 
     return (
       <div className={style.inputBlock}>
         <input
+           onChange={onChangeCallback}
             className={style.input}
             type="text"
             {...restProps}

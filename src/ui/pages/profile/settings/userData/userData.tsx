@@ -1,9 +1,9 @@
 import React from 'react';
-import style from 'styles/login.module.scss';
 import { useFormik } from 'formik';
 import { LoginUser } from 'bll/reducers/authReducer';
 import { Input } from 'ui/components/universal/input/Input';
 import {Button} from "ui/components/universal/button/Button";
+import s from 'styles/login.module.scss'
 
 type FormikErrorType= {
   lookingForAJob?: boolean
@@ -39,7 +39,12 @@ export const UserData = () => {
     },
     validate:(values) => {
 const errors:FormikErrorType={}
-
+if(!values.fullName){
+  errors.fullName = 'Поле не может быть пустым'
+}else if (values.fullName.length < 3){
+errors.fullName = "Слишком короткое имя"
+}
+return errors
     },
     onSubmit: values => {
       console.log(values);
@@ -49,7 +54,12 @@ const errors:FormikErrorType={}
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
-        <Input placeholder="Введите никнэйм" />
+        <div>
+        <Input placeholder="Введите никнэйм"
+               {...formik.getFieldProps('fullName')}
+        />
+        {formik.touched.fullName && formik.errors.fullName && <div className={s.error}>{formik.errors.fullName}</div>}
+        </div>
         <Input placeholder="website" />
         <Input placeholder="Введите статус " />
         <Input placeholder="Ожидание от работы" />
