@@ -45,6 +45,9 @@ export const UserData = () => {
       } else if (values.fullName.length < 3) {
         errors.fullName = 'Слишком короткое имя';
       }
+      if(!values.lookingForAJobDescription){
+        errors.lookingForAJobDescription = 'Поле не может быть пустым'
+      }
 
       return errors;
     },
@@ -64,9 +67,15 @@ export const UserData = () => {
         </div>
         <Input placeholder="website" />
         <div className={style.checkboxContainer}>
-        <Checkbox /> <span> Изменить Статус </span>
+        <Checkbox /> <span> В поисках работы </span>
         </div>
-        <Input placeholder="Ожидание от работы" />
+        <div>
+        <Input placeholder="Ожидание от работы"  {...formik.getFieldProps('lookingForAJobDescription')}/>
+          {formik.touched.lookingForAJobDescription && formik.errors.lookingForAJobDescription && (
+              <div className={s.error}>
+                {formik.errors.lookingForAJobDescription}
+          </div>) }
+        </div>
         <Input placeholder="Ссылка на GitHub" />
         <Input placeholder="Ссылка на VK" />
         <Input placeholder="facebook" />
