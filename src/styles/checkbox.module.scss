@@ -1,0 +1,21 @@
+@import "variables/variables";
+.checkboxContainer{
+  display: flex;
+  flex-direction: row;
+  .checkbox {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-left: 10px;
+
+
+  }
+  .checkbox:checked{
+    background: $bgColor1 no-repeat cover;
+
+  }
+
+}
+
+
