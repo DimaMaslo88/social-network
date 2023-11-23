@@ -47,6 +47,9 @@ export const UserData = () => {
       if (!values.facebook) {
         errors.facebook = 'Поле не может быть пустым';
       }
+      if(!values.github){
+        errors.github = 'Поле не может быть пустым'
+      }
 
       return errors;
     },
@@ -75,10 +78,16 @@ export const UserData = () => {
           />
           {formik.touched.lookingForAJobDescription &&
             formik.errors.lookingForAJobDescription && (
-              <div className={s.error}>{formik.errors.lookingForAJobDescription}</div>
+              <div >{formik.errors.lookingForAJobDescription}</div>
             )}
         </div>
-        <Input placeholder="Ссылка на GitHub" />
+        <div>
+          <Input placeholder="Ссылка на GitHub" {...formik.getFieldProps('github')} />
+          {formik.touched.github && formik.errors.github && (
+              <div className={s.error}>{formik.errors.github}</div>
+          )}
+        </div>
+
         <Input placeholder="Ссылка на VK" />
         <div>
           <Input
