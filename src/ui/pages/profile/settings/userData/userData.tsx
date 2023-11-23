@@ -4,22 +4,20 @@ import { Input } from 'ui/components/universal/input/Input';
 import { Button } from 'ui/components/universal/button/Button';
 import s from 'styles/login.module.scss';
 import { Checkbox } from 'ui/components/universal/checkbox/Checkbox';
-import style from 'styles/checkbox.module.scss'
+import style from 'styles/checkbox.module.scss';
 
 type FormikErrorType = {
   lookingForAJob?: boolean;
   lookingForAJobDescription?: string;
   fullName?: string;
-  contacts?: {
-    github?: string;
-    vk?: string;
-    facebook?: string;
-    instagram?: string;
-    twitter?: string;
-    website?: string;
-    youtube?: string;
-    mainLink?: string;
-  };
+  github?: string;
+  vk?: string;
+  facebook?: string;
+  instagram?: string;
+  twitter?: string;
+  website?: string;
+  youtube?: string;
+  mainLink?: string;
 };
 export const UserData = () => {
   const formik = useFormik({
@@ -27,16 +25,14 @@ export const UserData = () => {
       lookingForAJob: false,
       lookingForAJobDescription: '',
       fullName: '',
-      contacts: {
-        github: '',
-        vk: '',
-        facebook: '',
-        instagram: '',
-        twitter: '',
-        website: '', // ссылка на email
-        youtube: '',
-        mainLink: '', // ссылка на телеграм
-      },
+      github: '',
+      vk: '',
+      facebook: '',
+      instagram: '',
+      twitter: '',
+      website: '', // ссылка на email
+      youtube: '',
+      mainLink: '', // ссылка на телеграм
     },
     validate: values => {
       const errors: FormikErrorType = {};
@@ -45,8 +41,11 @@ export const UserData = () => {
       } else if (values.fullName.length < 3) {
         errors.fullName = 'Слишком короткое имя';
       }
-      if(!values.lookingForAJobDescription){
-        errors.lookingForAJobDescription = 'Поле не может быть пустым'
+      if (!values.lookingForAJobDescription) {
+        errors.lookingForAJobDescription = 'Поле не может быть пустым';
+      }
+      if (!values.facebook) {
+        errors.facebook = 'Поле не может быть пустым';
       }
 
       return errors;
@@ -67,18 +66,30 @@ export const UserData = () => {
         </div>
         <Input placeholder="website" />
         <div className={style.checkboxContainer}>
-        <Checkbox /> <span> В поисках работы </span>
+          <Checkbox /> <span> В поисках работы </span>
         </div>
         <div>
-        <Input placeholder="Ожидание от работы"  {...formik.getFieldProps('lookingForAJobDescription')}/>
-          {formik.touched.lookingForAJobDescription && formik.errors.lookingForAJobDescription && (
-              <div className={s.error}>
-                {formik.errors.lookingForAJobDescription}
-          </div>) }
+          <Input
+            placeholder="Ожидание от работы"
+            {...formik.getFieldProps('lookingForAJobDescription')}
+          />
+          {formik.touched.lookingForAJobDescription &&
+            formik.errors.lookingForAJobDescription && (
+              <div className={s.error}>{formik.errors.lookingForAJobDescription}</div>
+            )}
         </div>
         <Input placeholder="Ссылка на GitHub" />
         <Input placeholder="Ссылка на VK" />
-        <Input placeholder="facebook" />
+        <div>
+          <Input
+              placeholder="facebook"
+              {...formik.getFieldProps('facebook')}
+                        />
+          {formik.touched.facebook && formik.errors.facebook && (
+              <div className={s.error}> {formik.errors.facebook}</div>
+          )}
+        </div>
+
         <Input placeholder="twitter" />
         <Input placeholder="youtube" />
         <Input placeholder="telegram" />
