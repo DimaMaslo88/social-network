@@ -47,8 +47,16 @@ export const UserData = () => {
       if (!values.facebook) {
         errors.facebook = 'Поле не может быть пустым';
       }
-      if(!values.github){
-        errors.github = 'Поле не может быть пустым'
+      if (!values.github) {
+        errors.github = 'Поле не может быть пустым';
+      }
+      if (!values.instagram) {
+        errors.instagram = 'Поле не может быть пустым';
+      }
+      if (!values.website) {
+        errors.website = 'Поле не может быть пустым';
+      } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.website)) {
+        errors.website = 'Некорректный email';
       }
 
       return errors;
@@ -67,7 +75,13 @@ export const UserData = () => {
             <div className={s.error}>{formik.errors.fullName}</div>
           )}
         </div>
-        <Input placeholder="website" />
+        <div>
+          <Input placeholder="email" {...formik.getFieldProps('website')} />
+          {formik.touched.website && formik.errors.website && (
+            <div className={s.error}>{formik.errors.website}</div>
+          )}
+        </div>
+
         <div className={style.checkboxContainer}>
           <Checkbox /> <span> В поисках работы </span>
         </div>
@@ -78,28 +92,30 @@ export const UserData = () => {
           />
           {formik.touched.lookingForAJobDescription &&
             formik.errors.lookingForAJobDescription && (
-              <div >{formik.errors.lookingForAJobDescription}</div>
+              <div className={s.error}>{formik.errors.lookingForAJobDescription}</div>
             )}
         </div>
         <div>
           <Input placeholder="Ссылка на GitHub" {...formik.getFieldProps('github')} />
           {formik.touched.github && formik.errors.github && (
-              <div className={s.error}>{formik.errors.github}</div>
+            <div className={s.error}>{formik.errors.github}</div>
           )}
         </div>
 
         <Input placeholder="Ссылка на VK" />
         <div>
-          <Input
-              placeholder="facebook"
-              {...formik.getFieldProps('facebook')}
-                        />
+          <Input placeholder="facebook" {...formik.getFieldProps('facebook')} />
           {formik.touched.facebook && formik.errors.facebook && (
-              <div className={s.error}> {formik.errors.facebook}</div>
+            <div className={s.error}> {formik.errors.facebook}</div>
+          )}
+        </div>
+        <div>
+          <Input placeholder="instagram" {...formik.getFieldProps('instagram')} />
+          {formik.touched.instagram && formik.errors.instagram && (
+            <div className={s.error}>{formik.errors.instagram}</div>
           )}
         </div>
 
-        <Input placeholder="twitter" />
         <Input placeholder="youtube" />
         <Input placeholder="telegram" />
       </div>
