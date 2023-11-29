@@ -20,3 +20,10 @@ export const setInitialized = (isInitialed:boolean)=>{
         isInitialed
     }as const
 }
+export type SetCaptchaType = ReturnType<typeof setCaptcha>
+export const  setCaptcha =(captcha:string)=>{
+    return {
+        type:'SET-CAPTCHA',
+        captcha
+    }as const
+}

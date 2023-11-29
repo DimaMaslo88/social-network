@@ -4,8 +4,8 @@ import {AuthResponseType, InitializeResponseType} from "types/types";
 
 
 export const AuthApi = {
-loginUser(data:{email:string,password:string}){
-return instance.post<AuthResponseType>('/auth/login',data)
+loginUser(params:{email:string,password:string}){
+return instance.post<AuthResponseType>('/auth/login',params)
 },
 initializeUser(){
     return instance.get<InitializeResponseType>('/auth/me')

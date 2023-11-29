@@ -1,0 +1,28 @@
+@import 'variables/variables';
+@import 'mixins/mixins';
+
+.profileContainer{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  .settings{
+    margin-left:60%;
+    margin-top: 10px;
+  }
+  .avaBlock{
+    height: 100%;
+    display: flex;
+    width: 60%;
+    justify-content: space-around;
+    margin: 20px;
+    .avatar{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+.p{
+ @include textP($titleFontFamily2,20px,300)
+}
+  }
+
+}

@@ -5,25 +5,25 @@ import {LoginFormTYpe} from "types/types";
 import {useAppDispatch} from "bll/store";
 import {LoginUser} from "bll/reducers/authReducer";
 import {useSelector} from "react-redux";
-import {selectAppServerError, selectIsAuthUser} from "bll/selectors/Selectors";
+import {selectCaptcha, selectIsAuthUser} from "bll/selectors/Selectors";
 import {useNavigate} from "react-router-dom";
 import {Button} from "ui/components/universal/button/Button";
 import {EyeVisible} from "images/password icons/eye_visible";
 import {EyeNotVisible} from "images/password icons/eye-off-svgrepo-com";
-import {toast} from "react-toastify";
+
 
 export const Login = () => {
     const dispatch = useAppDispatch()
     const isAuth = useSelector(selectIsAuthUser)
     const navigate = useNavigate()
-    const [active,setActive] = useState<boolean>(false)
-    const error = useSelector(selectAppServerError)
+    const [active, setActive] = useState<boolean>(false)
+    const captcha = useSelector(selectCaptcha)
     useEffect(() => {
         if (isAuth) {
             navigate('/profile')
         }
     }, [isAuth])
-    const onClickHandler = ()=>{
+    const onClickHandler = () => {
         setActive(!active)
     }
     const formik = useFormik({
@@ -51,12 +51,6 @@ export const Login = () => {
         }
     })
 
-    const notify = () => {
-        if(error){
-            toast.error("Ebat")
-        }
-    }
-
 
     return (
         <form onSubmit={formik.handleSubmit} className={style.login}>
@@ -75,22 +69,22 @@ export const Login = () => {
                     }
                 </div>
                 {!active ? <div className={style.inputPasswordContainer}>
-                        <input
-                            type='password'
-                            className={style.inputPassword}
-                            placeholder='пароль'
+                    <input
+                        type='password'
+                        className={style.inputPassword}
+                        placeholder='пароль'
 
-                            {...formik.getFieldProps('password')}
+                        {...formik.getFieldProps('password')}
 
-                        />
-                        <span className={style.spanToggle} >
+                    />
+                    <span className={style.spanToggle}>
                         <EyeVisible
                             width='30px'
                             className={style.toggleIcon}
                             onClick={onClickHandler}
                         />
                     </span>
-                </div>: <div className={style.inputPasswordContainer}>
+                </div> : <div className={style.inputPasswordContainer}>
                     <input
                         type='text'
                         className={style.inputPassword}
@@ -102,13 +96,13 @@ export const Login = () => {
                     <span className={style.spanToggle}>
                         <EyeNotVisible
                             width='25px'
-                            height='30px'
+                            height='32px'
                             className={style.toggleIcon}
                             onClick={onClickHandler}
                         />
                     </span>
                 </div>
-                    }
+                }
 
                 {formik.touched.password && formik.errors.password && (
                     <div className={style.error}>
@@ -116,11 +110,12 @@ export const Login = () => {
                     </div>
                 )}
             </div>
+            {captcha && <img src={captcha} alt='Введите символы на картинке'/>}
             <div>
                 <Button
                     type='submit'
                     disabled={!formik.isValid}
-                    onClick={notify}
+
                 >Подтвердить
                 </Button>
             </div>

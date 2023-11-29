@@ -2,13 +2,15 @@ import {applyMiddleware, combineReducers, legacy_createStore as createStore} fro
 import {MessagesReducer, MessagesReducerActions} from "bll/reducers/messagesReducer";
 import {useDispatch} from "react-redux";
 import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
-import {AuthReducer, AuthReducerActions} from "bll/reducers/authReducer";
+import {AuthReducer, authReducerActions} from "bll/reducers/authReducer";
 import {AppReducer, appStateActionsType} from "bll/reducers/appReducer";
+import {UserReducer, userReducerActions} from "bll/reducers/userReducer";
 
 const rootReducer=combineReducers({
     messages:MessagesReducer,
     auth:AuthReducer,
-    app:AppReducer
+    app:AppReducer,
+    user:UserReducer,
 })
 export const store = createStore(rootReducer,applyMiddleware(thunk))
 export type StateType =ReturnType<typeof rootReducer>
@@ -25,8 +27,9 @@ export type AppThunkType<ReturnType = void> = ThunkAction<
     ActionStateType
     >;
 export type ActionStateType = MessagesReducerActions
-|AuthReducerActions
+|authReducerActions
 |appStateActionsType
+|userReducerActions
 
 // @ts-ignore
 window.store = store
