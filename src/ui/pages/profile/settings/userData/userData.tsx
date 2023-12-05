@@ -5,8 +5,13 @@ import { Button } from 'ui/components/universal/button/Button';
 import s from 'styles/login.module.scss';
 import { Checkbox } from 'ui/components/universal/checkbox/Checkbox';
 import style from 'styles/checkbox.module.scss';
+import { UpdateUserData } from 'bll/reducers/userReducer';
+import { useSelector } from 'react-redux';
+import { selectUserId } from 'bll/selectors/Selectors';
+import {useAppDispatch} from "bll/store";
 
 type FormikErrorType = {
+  userId?:number
   lookingForAJob?: boolean;
   lookingForAJobDescription?: string;
   fullName?: string;
@@ -20,8 +25,11 @@ type FormikErrorType = {
   mainLink?: string;
 };
 export const UserData = () => {
+  const userIdData = useSelector(selectUserId);
+  const dispatch = useAppDispatch()
   const formik = useFormik({
     initialValues: {
+      userId:userIdData,
       lookingForAJob: false,
       lookingForAJobDescription: '',
       fullName: '',
@@ -42,7 +50,7 @@ export const UserData = () => {
         errors.fullName = 'Слишком короткое имя';
       }
       if (!values.lookingForAJobDescription) {
-        errors.lookingForAJobDescription = 'Поле не может быть пустым';
+        errors.lookingForAJobDescription = 'Заполните поле';
       }
       if (!values.facebook) {
         errors.facebook = 'Поле не может быть пустым';
@@ -58,11 +66,23 @@ export const UserData = () => {
       } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.website)) {
         errors.website = 'Некорректный email';
       }
+      if (!values.mainLink) {
+        errors.mainLink = 'Поле не может быть пустым';
+      }
+      if (!values.youtube) {
+        errors.youtube = 'Поле не может быть пустым';
+      }
+      if (!values.vk) {
+        errors.vk = 'Поле не может быть пустым';
+      }
+      if(!values.twitter){
+        errors.twitter = 'Поле не может быть пустым';
+      }
 
       return errors;
     },
     onSubmit: values => {
-      console.log(values);
+      dispatch(UpdateUserData(values));
       formik.resetForm();
     },
   });
@@ -83,7 +103,11 @@ export const UserData = () => {
         </div>
 
         <div className={style.checkboxContainer}>
-          <Checkbox /> <span> В поисках работы </span>
+          <Checkbox
+            checked={formik.values.lookingForAJob}
+            {...formik.getFieldProps('lookingForAJob')}
+          />
+          <span> В поисках работы </span>
         </div>
         <div>
           <Input
@@ -101,8 +125,18 @@ export const UserData = () => {
             <div className={s.error}>{formik.errors.github}</div>
           )}
         </div>
-
-        <Input placeholder="Ссылка на VK" />
+        <div>
+          <Input placeholder="Ссылка на VK" {...formik.getFieldProps('vk')} />
+          {formik.touched.vk && formik.errors.vk && (
+            <div className={s.error}>{formik.errors.vk}</div>
+          )}
+        </div>
+        <div>
+          <Input placeholder="Ссылка на twitter" {...formik.getFieldProps('twitter')} />
+          {formik.touched.twitter && formik.errors.twitter && (
+              <div className={s.error}>{formik.errors.twitter}</div>
+          )}
+        </div>
         <div>
           <Input placeholder="facebook" {...formik.getFieldProps('facebook')} />
           {formik.touched.facebook && formik.errors.facebook && (
@@ -115,11 +149,21 @@ export const UserData = () => {
             <div className={s.error}>{formik.errors.instagram}</div>
           )}
         </div>
+        <div>
+          <Input placeholder="youtube" {...formik.getFieldProps('youtube')} />
+          {formik.touched.youtube && formik.errors.youtube && (
+            <div className={s.error}>{formik.errors.youtube}</div>
+          )}
+        </div>
 
-        <Input placeholder="youtube" />
-        <Input placeholder="telegram" />
+        <div>
+          <Input placeholder="telegram" {...formik.getFieldProps('mainLink')} />
+          {formik.touched.mainLink && formik.errors.mainLink && (
+            <div className={s.error}>{formik.errors.mainLink}</div>
+          )}
+        </div>
       </div>
-      <Button>Изменить</Button>
+      <Button type='submit'>Изменить</Button>
     </form>
   );
 };

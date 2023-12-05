@@ -13,7 +13,7 @@ export type LoginFormTYpe = {
 // User Types
 
 export type UserDataType = {
-    userId: number
+    userId: number | null
     lookingForAJob?: boolean
     lookingForAJobDescription?: string
     fullName?: string
@@ -29,7 +29,7 @@ export type UserDataType = {
     }
 }
 
-// ResponseTypes
+// Auth ResponseTypes
 export type AuthResponseType={
     resultCode:number,
     messages:string,
@@ -47,6 +47,7 @@ export type InitializeResponseType={
         login: string
     }
 }
+// User Response Type
 export type  UserResponseType ={
     userId: number
     lookingForAJob: boolean
@@ -68,4 +69,12 @@ export type  UserResponseType ={
         large: string
     }
 
+}
+
+export type UserUpdateResponseType={
+    resultCode:number,
+    messages:string,
+    data: {
+
+    }
 }
