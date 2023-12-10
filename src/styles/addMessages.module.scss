@@ -1,0 +1,16 @@
+@import "variables/variables";
+.textAreaBlock{
+
+  .textArea{
+    resize: none;
+    height: 100px;
+    width: 300px;
+    overflow: hidden;
+    border-radius: 6px;
+  }
+  .textArea:focus{
+    box-shadow: 3px 3px 2px 1px $bgColor4
+
+  }
+
+}
