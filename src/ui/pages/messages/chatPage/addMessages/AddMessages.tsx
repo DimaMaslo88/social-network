@@ -1,6 +1,7 @@
 import {useAppDispatch} from 'bll/store';
 import React, {ChangeEvent, useState} from 'react';
 import {setMessages} from "bll/actions/messagesActions";
+import style from 'styles/addMessages.module.scss'
 
 export const AddMessages = () => {
     const dispatch = useAppDispatch()
@@ -15,13 +16,18 @@ export const AddMessages = () => {
     }
     return (
         <div>
-            <div>
+            <h3>Напишите сообщение</h3>
+            <div className={style.textAreaBlock}>
                 <textarea
                     value={value}
+                    maxLength={200}
+                    rows={4}
+                    cols={20}
+                    className={style.textArea}
                     onChange={onChangeValueHandler}/>
             </div>
             <div>
-                <button onClick={setMessageHandler}>Отправить</button>
+                <button onClick={setMessageHandler} disabled={!value}>Отправить</button>
             </div>
 
         </div>

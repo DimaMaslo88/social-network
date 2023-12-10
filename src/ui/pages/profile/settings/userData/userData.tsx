@@ -8,10 +8,10 @@ import style from 'styles/checkbox.module.scss';
 import { UpdateUserData } from 'bll/reducers/userReducer';
 import { useSelector } from 'react-redux';
 import { selectUserId } from 'bll/selectors/Selectors';
-import {useAppDispatch} from "bll/store";
+import { useAppDispatch } from 'bll/store';
 
 type FormikErrorType = {
-  userId?:number
+  userId?: number;
   lookingForAJob?: boolean;
   lookingForAJobDescription?: string;
   fullName?: string;
@@ -26,10 +26,10 @@ type FormikErrorType = {
 };
 export const UserData = () => {
   const userIdData = useSelector(selectUserId);
-  const dispatch = useAppDispatch()
+  const dispatch = useAppDispatch();
   const formik = useFormik({
     initialValues: {
-      userId:userIdData,
+      userId: userIdData,
       lookingForAJob: false,
       lookingForAJobDescription: '',
       fullName: '',
@@ -75,7 +75,7 @@ export const UserData = () => {
       if (!values.vk) {
         errors.vk = 'Поле не может быть пустым';
       }
-      if(!values.twitter){
+      if (!values.twitter) {
         errors.twitter = 'Поле не может быть пустым';
       }
 
@@ -134,7 +134,7 @@ export const UserData = () => {
         <div>
           <Input placeholder="Ссылка на twitter" {...formik.getFieldProps('twitter')} />
           {formik.touched.twitter && formik.errors.twitter && (
-              <div className={s.error}>{formik.errors.twitter}</div>
+            <div className={s.error}>{formik.errors.twitter}</div>
           )}
         </div>
         <div>
@@ -163,7 +163,7 @@ export const UserData = () => {
           )}
         </div>
       </div>
-      <Button type='submit'>Изменить</Button>
+      <Button type="submit">Изменить</Button>
     </form>
   );
 };
