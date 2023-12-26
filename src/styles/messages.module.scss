@@ -6,13 +6,14 @@
   //overflow-y:auto;
 
   .message {
-    min-height: 50px;
-    max-height: 200px;
+    max-height: 100%;
     width: auto;
     background-color: $bgColor2;
     border: 1px solid #6c6868;
     border-radius: 5px;
     margin-top: 10px;
-    list-style-type:none;
+    list-style-type: none;
+    overflow-wrap: break-word;
+    padding: 5px;
   }
 }

@@ -6,6 +6,7 @@ import {Login} from "ui/pages/authorization/login/Login";
 import {Profile} from "ui/pages/profile/profile";
 import style from 'styles/pages.module.scss'
 import {Settings} from "ui/pages/profile/settings/settings";
+import {UsersPage} from "ui/pages/community/UsersPage";
 
 export const Pages = () => {
     return (
@@ -15,6 +16,7 @@ export const Pages = () => {
                 <Route path={PATH.login} element={<Login/>}/>
                 <Route path={PATH.profile} element={<Profile/>}/>
                 <Route path={`${PATH.profile}/settings`} element={<Settings/>}/>
+                <Route path={PATH.users} element={<UsersPage/>}/>
             </Routes>
         </div>
     );

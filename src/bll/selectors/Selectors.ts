@@ -1,4 +1,5 @@
 import {StateType} from "bll/store";
+import {ItemsType} from "types/types";
 
 export const selectMessage =(state:StateType):string[]=>state.messages.messages
 export const selectIsAuthUser =(state:StateType):boolean=>state.auth.isAuth
@@ -11,3 +12,4 @@ export const selectUserName = (state:StateType):string=>state.user.fullName
 export const selectUserPhotoLarge =(state:StateType):string=>state.user.photos.large
 export const selectUserPhotoSmall =(state:StateType):string=>state.user.photos.small
 export const selectUserJob = (state:StateType):boolean=>state.user.lookingForAJob
+export const selectUsers = (state:StateType):ItemsType[] => state.users.items

@@ -4,13 +4,15 @@ import {useDispatch} from "react-redux";
 import thunk, {ThunkAction, ThunkDispatch} from "redux-thunk";
 import {AuthReducer, authReducerActions} from "bll/reducers/authReducer";
 import {AppReducer, appStateActionsType} from "bll/reducers/appReducer";
-import {UserReducer, userReducerActions} from "bll/reducers/userReducer";
+import {UserReducer, UserReducerActions,} from "bll/reducers/userReducer";
+import {UsersReducer, UsersReducerGeneralType} from "bll/reducers/usersReducer";
 
 const rootReducer=combineReducers({
     messages:MessagesReducer,
     auth:AuthReducer,
     app:AppReducer,
     user:UserReducer,
+    users:UsersReducer
 })
 export const store = createStore(rootReducer,applyMiddleware(thunk))
 export type StateType =ReturnType<typeof rootReducer>
@@ -29,8 +31,8 @@ export type AppThunkType<ReturnType = void> = ThunkAction<
 export type ActionStateType = MessagesReducerActions
 |authReducerActions
 |appStateActionsType
-|userReducerActions
-
+|UserReducerActions
+|UsersReducerGeneralType
 // @ts-ignore
 window.store = store
 
