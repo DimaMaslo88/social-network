@@ -7,6 +7,6 @@ export const UserApi={
     },
     updateUser( data:UserDataType){
         return instance.put('/profile',data)
-    }
+    },
 
 }

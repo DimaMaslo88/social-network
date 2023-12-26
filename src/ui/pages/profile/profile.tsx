@@ -40,7 +40,7 @@ const navigateHandler = ()=>{
 
             <h1> My profile</h1>
             <div className={s.avaBlock}>
-                <div className={s.avatar}>{photoSmall === null ?
+                <div className={s.avatar}>{photoSmall === null || '' ?
                     <Avatar
                         className={style.ava}
                         width={150}

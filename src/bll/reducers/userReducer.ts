@@ -52,11 +52,11 @@ export type UserReducerType = {
   };
 };
 
-export type userReducerActions = SetUserProfileDataType | SetUserIdType;
+export type UserReducerActions = SetUserProfileDataType | SetUserIdType;
 
 export const UserReducer = (
   state: UserReducerType = userReducerState,
-  action: userReducerActions,
+  action: UserReducerActions,
 ): UserReducerType => {
   switch (action.type) {
     case 'SET-USER-ID': {

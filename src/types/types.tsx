@@ -78,3 +78,20 @@ export type UserUpdateResponseType={
 
     }
 }
+// usersResponseType
+export type UsersResponseType ={
+    items: ItemsType[]
+    totalCount:number
+
+}
+export type ItemsType={
+    name: string,
+    id: number,
+    photos: {
+        small: null,
+        large: null
+    },
+    status: null,
+    followed: boolean
+}
+
