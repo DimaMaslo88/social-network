@@ -1,0 +1,6 @@
+@import 'variables/variables';
+@import 'mixins/mixins';
+.textStyle{
+  @include text($titleFontFamily2,18px,500);
+  padding-left: 30px;
+}
