@@ -3,6 +3,7 @@ import {setOtherUsers, SetOtherUsers} from "bll/actions/usersAction";
 import {AppThunkType} from "bll/store";
 import {setAppStatus} from "bll/actions/appActions";
 import {UsersApi} from "api/users-api/users-api";
+import {FollowApi} from "api/follow-api/follow-api";
 
 export const usersStateValue = {
   items: [] ,
@@ -23,7 +24,7 @@ export const UsersReducer = (state: UsersReducerType=usersStateValue, action: Us
   }
 };
 
-
+// Thunks
 export const GetUsers = ():AppThunkType=>async(dispatch)=>{
   dispatch(setAppStatus(true))
   try{
@@ -33,6 +34,17 @@ export const GetUsers = ():AppThunkType=>async(dispatch)=>{
   }catch (error){
     console.log(error)
   }finally{
+    dispatch(setAppStatus(false))
+  }
+}
+
+export const PostFollow =(userId:number):AppThunkType =>async (dispatch) =>{
+  dispatch(setAppStatus(true))
+  try{
+    const res = await FollowApi.createFollow(userId)
+  }catch(error){
+    console.log(error)
+  }finally {
     dispatch(setAppStatus(false))
   }
 }
