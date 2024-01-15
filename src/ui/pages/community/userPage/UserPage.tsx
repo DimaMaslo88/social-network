@@ -2,6 +2,7 @@ import React from 'react';
 import { Avatar } from 'images/avatars/avatar';
 import style from 'styles/settings.module.scss';
 import s from 'styles/usersPage.module.scss'
+import {Button} from "ui/components/universal/button/Button";
 
 type UserPageType = {
   name: string;
@@ -11,8 +12,8 @@ type UserPageType = {
 };
 export const UserPage = ({ name, followed, status, photo }: UserPageType) => {
   return (
-    <div>
-      <div>
+    <div className={s.userPageContainer}>
+      <div className={s.avatar}>
         {photo === null ? (
           <Avatar className={style.ava} width={120} height={120} />
         ) : (
@@ -22,7 +23,11 @@ export const UserPage = ({ name, followed, status, photo }: UserPageType) => {
         <div className={s.textStyle}>
       {name}
         </div>
-      {followed}
+      <div className={s.buttons}>
+          {followed ? <Button>Отписаться</Button> : <Button>Подписаться</Button> }
+
+
+      </div>
     </div>
   );
 };

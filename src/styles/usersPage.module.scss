@@ -1,6 +1,21 @@
 @import 'variables/variables';
 @import 'mixins/mixins';
-.textStyle{
-  @include text($titleFontFamily2,18px,500);
-  padding-left: 30px;
+.userPageContainer{
+  width: 500px;
+  background-color: red;
+  .avatar{
+    display: flex;
+    justify-content: center;
+  }
+  .textStyle{
+
+    @include text($titleFontFamily2,18px,500);
+    padding-left: 180px;
+  }
+  .buttons{
+    display: flex;
+    justify-content:center;
+
+  }
 }
+
