@@ -13,3 +13,4 @@ export const selectUserPhotoLarge =(state:StateType):string=>state.user.photos.l
 export const selectUserPhotoSmall =(state:StateType):string=>state.user.photos.small
 export const selectUserJob = (state:StateType):boolean=>state.user.lookingForAJob
 export const selectUsers = (state:StateType):ItemsType[] => state.users.items
+export const selectTotalCounts = (state:StateType):number => state.users.totalCount
