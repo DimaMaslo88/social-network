@@ -1,24 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'ui/components/universal/button/Button';
 import { useSelector } from 'react-redux';
 import { selectTotalCounts } from 'bll/selectors/Selectors';
+import style from 'styles/usersPage.module.scss';
 
-export const Pagination = () => {
+type PaginationType={
+  elementOnPage:number
+  currentPage:number
+  changeCurrentPageNext:()=>void
+  changeCurrentPagePrevious:()=>void
+}
+export const Pagination = ({elementOnPage,currentPage,changeCurrentPageNext,changeCurrentPagePrevious}:PaginationType) => {
   const totalCount = useSelector(selectTotalCounts);
-  const elementOnPage = 5;
-  const totalPages = totalCount / elementOnPage;
+
+  const totalCountChanged = totalCount / 250;
+   const totalPages = totalCountChanged / elementOnPage;
   const pages = [];
-  for (let i = 0; i <= 25; i += 1) {
+  for (let i = 1; i <= totalPages; i += 1) {
     pages.push(i);
   }
+
+
+
   return (
     <div>
-      <Button>Назад</Button>
+      <Button onClick={changeCurrentPagePrevious}>Назад</Button>
+
       {pages.map(page => (
-        <span key={page}>{page}</span>
+        <span
+          key={page}
+          className={currentPage === page ? style.pageNumberActive : style.pageNumber}
+        >
+          {page}
+        </span>
       ))}
-      <Button>Вперед</Button>
+
+      <Button onClick={changeCurrentPageNext}>Вперед</Button>
     </div>
   );
 };
-
