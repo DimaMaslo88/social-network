@@ -1,5 +1,6 @@
 @import 'variables/variables';
 @import 'mixins/mixins';
+// стили для страницы user(одного пользователя)
 .userPageContainer{
   width: 500px;
   background-color: red;
@@ -16,6 +17,18 @@
     display: flex;
     justify-content:center;
 
+  }
+}
+// стили для страницы users
+.pagination{
+  display: flex;
+  justify-content: center;
+  .pageNumber{
+    padding: 5px;
+  }
+  .pageNumberActive{
+    padding: 5px;
+@include text($titleFontFamily2,16px,800)
   }
 }
 

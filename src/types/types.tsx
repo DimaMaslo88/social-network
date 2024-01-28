@@ -1,4 +1,6 @@
 // NavBarType
+import {stringify} from "querystring";
+
 export type NavTitleType = {
     title:string
 }
@@ -94,4 +96,10 @@ export type ItemsType={
     status: null,
     followed: boolean
 }
-
+// query params
+export type QueryParamsType={
+    count?:number // кол-во юзеров в респонсе
+    page?:number
+    term?:string
+    friend?:boolean
+}

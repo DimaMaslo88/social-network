@@ -1,5 +1,5 @@
 import {ItemsType, UsersResponseType} from "types/types";
-import {setOtherUsers, SetOtherUsers} from "bll/actions/usersAction";
+import {setCount, SetCountType, setOtherUsers, SetOtherUsers} from "bll/actions/usersAction";
 import {AppThunkType} from "bll/store";
 import {setAppStatus} from "bll/actions/appActions";
 import {UsersApi} from "api/users-api/users-api";
@@ -8,16 +8,23 @@ import {FollowApi} from "api/follow-api/follow-api";
 export const usersStateValue = {
   items: [] ,
   totalCount: 0,
+  count:0,
+
 };
 export type UsersReducerType = {
   items: ItemsType[],
-  totalCount:number
+  totalCount:number,
+  count:number
 }
 export type UsersReducerGeneralType = SetOtherUsers
+|SetCountType
 export const UsersReducer = (state: UsersReducerType=usersStateValue, action: UsersReducerGeneralType):UsersReducerType => {
   switch (action.type) {
     case 'users/SET-OTHER-USERS':{
       return {...state,...action.value}
+    }
+    case 'users/SET-COUNT':{
+      return {...state,count:action.count}
     }
     default:
       return state;
@@ -26,11 +33,16 @@ export const UsersReducer = (state: UsersReducerType=usersStateValue, action: Us
 
 // Thunks
 export const GetUsers = ():AppThunkType=>async(dispatch)=>{
-  dispatch(setAppStatus(true))
+    dispatch(setAppStatus(true))
+  const params={
+      count:100
+  }
   try{
-    const res = await UsersApi.getUsers()
+    const res = await UsersApi.getUsers(params)
     console.log(res)
     dispatch(setOtherUsers(res.data))
+
+
   }catch (error){
     console.log(error)
   }finally{
