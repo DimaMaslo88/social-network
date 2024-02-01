@@ -103,3 +103,11 @@ export type QueryParamsType={
     term?:string
     friend?:boolean
 }
+// Followed response
+export type FollowedResponseType={
+    resultCode:number,
+    messages:string,
+    data: {
+
+    }
+}

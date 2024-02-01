@@ -15,3 +15,17 @@ export const setCount = (count:number)=>{
         count
     }as const
 }
+export type SetFollowedUserType = ReturnType<typeof setFollowedUser>
+export const setFollowedUser = (userId:number)=>{
+    return {
+        type:'users/SET-FOLLOWED-USER',
+        userId
+    }as const
+}
+export type SetUnFollowedUserType = ReturnType<typeof setUnFollowedUser>
+export const setUnFollowedUser = (userId:number)=>{
+    return {
+        type:'users/SET-UNFOLLOWED-USER',
+        userId
+    }as const
+}
